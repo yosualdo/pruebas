@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Accelerometer Shake Test</title>
+
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/shake.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for Cordova to connect with the device
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // Cordova is ready to be used!
+    //
+    function onDeviceReady() {
+		var element = document.getElementById('deviceIsReady');
+		element.innerHTML = 'Watching shake movement...';
+		
+		shake.startWatch(onDetected);
+    }
+
+    function vibrate() {
+        navigator.notification.vibrate(2000);
+    }
+  
+	
+	function onDetected() {
+
+   
+		var element = document.getElementById('shakeData');
+
+		element.innerHTML = 'Esta hecho ganaste un descuento! <p><button type="button" onclick="clearShakeData();">Cerrar</button></p>'
+    vibrate(); return false;
+	}
+
+	function clearShakeData(){
+		document.getElementById('shakeData').innerHTML = '';
+	}
+
+    </script>
+  </head>
+  <body>
+	<div id="deviceIsReady">Cargando...</div>
+    <p id="shakeData"><a href="#" onclick="vibrate(); return false;">Vibrate</a>
+
+	</p>
+  </body>
+</html>
